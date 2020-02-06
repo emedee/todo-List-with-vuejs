@@ -55,6 +55,8 @@ export default {
 
                 completed: [],
                 display: false,
+                todoToUpdate: null,
+                editField: null,
                 
             }
         },
@@ -78,6 +80,7 @@ export default {
                 this.myList.input = id
                 this.display = true
                 console.log(this.myList.input)
+                this.todoToUpdate = this.todos.indexOf(id)
             },
             update(){
                 Swal.fire(
@@ -86,6 +89,7 @@ export default {
                     'success'
                 )
                 this.display = false;
+                this.todos[this.todoToUpdate] = this.myList.input;
                 this.myList.input = "";
             },
             strikeThrough(i){
