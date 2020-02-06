@@ -47,62 +47,67 @@
 
 <script>
 export default {
-        data () {
-            return {
-                myList:{
-                    input: "",
-                },
-                todos: [],
+    data () {
+        return {
+            myList:{
+                input: "",
+            },
+            todos: [],
 
-                completed: [],
-                display: false,
-                toggle: false,
-                secondToggle: false,
-                todoToUpdate: null,
-                editField: null,
-                
+            completed: [],
+            display: false,
+            toggle: false,
+            secondToggle: false,
+            todoToUpdate: null,
+            editField: null,
+            
+        }
+    },
+    methods: {
+        addTodos() {
+            if(this.myList.input === ''){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please insert a to-do',
+                })
+            }else{
+                this.toggle = true
+                this.todos.push(this.myList.input);
+                this.myList.input = "";
             }
         },
-        methods: {
-            addTodos() {
-                if(this.myList.input === ''){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Please insert a to-do',
-                    })
-                }else{
-                    this.toggle = true
-                    this.todos.push(this.myList.input);
-                    this.myList.input = "";
-                }
-            },
-            deleteTodos(index){
-                this.todos.splice(index, 1)
-            },
-            editTodos(id){
-                this.myList.input = id
-                this.display = true
-                console.log(this.myList.input)
-                this.todoToUpdate = this.todos.indexOf(id)
-            },
-            update(){
-                Swal.fire(
-                    'Good job!',
-                    'You Updated your toDos',
-                    'success'
-                )
-                this.display = false;
-                this.todos[this.todoToUpdate] = this.myList.input;
-                this.myList.input = "";
-            },
-            completedTasks(i){
-                this.secondToggle = true;
-                console.log(this.todos[i])
-                this.completed.push(this.todos[i]);
-                this.todos.splice(i, 1)
-            },
-        }
+        deleteTodos(index){
+            this.todos.splice(index, 1)
+        },
+        editTodos(id){
+            this.myList.input = id
+            this.display = true
+            this.todoToUpdate = this.todos.indexOf(id)
+        },
+        update(){
+            Swal.fire(
+                'Good job!',
+                'You Updated your toDos',
+                'success'
+            )
+            this.display = false;
+            this.todos[this.todoToUpdate] = this.myList.input;
+            this.myList.input = "";
+        },
+        completedTasks(i){
+            Swal.fire({
+                position: 'top',
+                icon: 'success',
+                title: 'Congratulations!, You have completed a task for today',
+                showConfirmButton: false,
+                timer: 2500
+            })
+            this.secondToggle = true;
+            this.completed.push(this.todos[i]);
+            this.todos.splice(i, 1)
+        },
+    }
 }
 </script>
 
