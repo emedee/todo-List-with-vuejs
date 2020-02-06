@@ -52,7 +52,7 @@
                             <ul class="list-group">
                                 <li v-for="(todo, index) in todos" :key="index" class="list-group-item">
                                     <p>{{ index + 1 }}- <span @click="strikeThrough(index)" class="myHov" >{{ todo }}</span>
-                                    <span class="mys" @click="deleteTodos(index)">Delete</span>
+                                    <span @click="deleteTodos(index)"><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></span>
                                     <span class="mys mr-2" @click="editTodos(todo)">Edit</span></p>       
                                 </li>
                             </ul>
@@ -109,10 +109,9 @@ export default {
     float: right;
     width: 70px;
     height: 40px;
-    padding: 5px;
-    background-color: rgb(161, 156, 156);
+    padding: 2px;
     text-align: center;
-    color: white;
+    color: gray;
     border-radius: 10px;
 }
 .myHov2{
@@ -123,5 +122,8 @@ export default {
 }
 .mys:hover{
     cursor: pointer;
+}
+@media screen {
+    
 }
 </style>
